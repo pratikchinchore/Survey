@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exit Employee Feedback</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #dee4f0;
+      --bg-2: #cfd8e6;
+      --card: #fdfdfd;
+      --card-soft: #f6f8fc;
+      --accent: #2457c6;
+      --accent-2: #1f4cb3;
+      --muted: #444d63;
+      --text: #0e1421;
+      --radius: 16px;
+      font-size: 18px;
+      /* increased base font size */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .survey-wrapper {
+      width: 95%;
+      max-width: 1100px;
+    }
+
+    .survey-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 48px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(15, 23, 36, 0.06);
+      transition: all .3s ease;
+    }
+
+    .header {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #f2f6ff, #e3ebff);
+      border: 1px solid rgba(36, 87, 198, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .layout {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    .main {
+      flex: 1;
+      min-width: 400px;
+    }
+
+    .panel {
+      width: 280px;
+      flex-shrink: 0;
+    }
+
+    .meta {
+      background: linear-gradient(180deg, #f8faff, #eef2ff);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(15, 23, 36, 0.06);
+      box-shadow: 0 8px 22px rgba(15, 23, 36, 0.05);
+      margin-bottom: 16px;
+    }
+
+    .meta h4 {
+      margin: 0;
+      color: var(--accent);
+      font-size: 17px;
+    }
+
+    .meta p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .card-section {
+      background: var(--card-soft);
+      border-radius: 12px;
+      padding: 20px 22px;
+      border: 1px solid #d6dff2;
+      margin-bottom: 16px;
+      box-shadow: 0 12px 28px rgba(15, 23, 36, 0.04);
+    }
+
+    label {
+      display: block;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #ccd7ef;
+      background: #fff;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .input:focus {
+      outline: none;
+      box-shadow: 0 8px 26px rgba(36, 87, 198, 0.15);
+      border-color: var(--accent);
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .progress-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .progress-text {
+      color: var(--muted);
+      font-size: 15px;
+      min-width: 140px;
+    }
+
+    .progress {
+      flex: 1;
+      height: 12px;
+      border-radius: 12px;
+      background: #e2e8f6;
+      overflow: hidden;
+      border: 1px solid rgba(15, 23, 36, 0.05);
+    }
+
+    .progress>.bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width .45s cubic-bezier(.2, .9, .3, 1);
+    }
+
+    .question-area {
+      min-height: 260px;
+      position: relative;
+    }
+
+    .question-card {
+      border-radius: 12px;
+      padding: 22px;
+      background: var(--card-soft);
+      border: 1px solid #d6dff2;
+      box-shadow: 0 12px 32px rgba(15, 23, 36, 0.05);
+    }
+
+    .anim-enter {
+      animation: enterUp .45s ease both;
+    }
+
+    @keyframes enterUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .q-title {
+      font-weight: 600;
+      font-size: 19px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .options {
+      display: block;
+    }
+
+    .option {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .option label {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccd7ef;
+      cursor: pointer;
+      background: #fff;
+      transition: box-shadow .12s ease, transform .12s ease;
+      font-size: 16px;
+    }
+
+    .option label:hover {
+      box-shadow: 0 8px 20px rgba(15, 23, 36, 0.06);
+      transform: translateY(-3px);
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      transform: scale(1.2);
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .star {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: #fbfdff;
+      border: 1px solid #d6e1ff;
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease;
+    }
+
+    .star:hover {
+      transform: translateY(-4px);
+    }
+
+    .star svg {
+      width: 22px;
+      height: 22px;
+      fill: #c2c6d3;
+    }
+
+    .star.active svg {
+      fill: var(--accent);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccd7ef;
+      resize: vertical;
+      font-size: 16px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(36, 87, 198, 0.18);
+      font-size: 16px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #d0daef;
+      padding: 11px 18px;
+      border-radius: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .thankyou {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(12, 18, 28, 0.55);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+
+    .thankyou.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ty-card {
+      background: var(--card);
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      width: 90%;
+      max-width: 560px;
+      box-shadow: 0 20px 70px rgba(12, 18, 28, 0.35);
+      transform: translateY(12px);
+      animation: tyPop .6s cubic-bezier(.2, .9, .3, 1) forwards;
+    }
+
+    @keyframes tyPop {
+      from {
+        transform: translateY(24px) scale(.97);
+        opacity: 0
+      }
+
+      to {
+        transform: none;
+        opacity: 1
+      }
+    }
+
+    .ty-check {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ecf8f0, #dff3e7);
+      border: 1px solid rgba(40, 167, 69, 0.15);
+    }
+
+    .ty-check svg {
+      width: 52px;
+      height: 52px;
+      fill: #1f7a3a;
+    }
+
+    .ty-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 10px 0 8px;
+      color: var(--text);
+    }
+
+    .ty-sub {
+      color: var(--muted);
+      margin: 0;
+      font-size: 16px;
+    }
+
+    @media(max-width:900px) {
+      .layout {
+        flex-direction: column
+      }
+
+      .panel {
+        width: 100%
+      }
+
+      .survey-card {
+        padding: 28px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="survey-wrapper">
+    <div class="survey-card" role="main" aria-labelledby="surveyTitle">
+      <div class="header">
+        <div class="logo">HR</div>
+        <div>
+          <h2 id="surveyTitle" class="title">Exit Employee Feedback</h2>
+          <p class="subtitle">We value your insights — help us improve with your honest feedback.</p>
+        </div>
+      </div>
+      <div class="layout">
+        <div class="main">
+          <div class="progress-row">
+            <div class="progress-text" id="progressText">Details</div>
+            <div class="progress">
+              <div class="bar" id="progressBar"></div>
+            </div>
+          </div>
+          <div id="details" class="card-section">
+            <div class="q-title">Your Details</div>
+
+            <div style="display:flex;gap:14px;margin-bottom:12px;">
+              <div style="flex:1">
+                <label class="muted">Employee ID <span style="color:#ff6b6b">*</span></label>
+                <input id="emp_id" class="input" required />
+              </div>
+              <div style="flex:1">
+                <label class="muted">Department <span style="color:#ff6b6b">*</span></label>
+                <input id="emp_dept" class="input" required />
+              </div>
+            </div>
+
+            <label class="muted">Full Name <span style="color:#ff6b6b">*</span></label>
+            <input id="emp_name" class="input" required />
+
+            <p id="detailError" style="color:#ff6b6b;display:none;margin-top:8px;font-size:15px;">
+              ⚠ Please fill in all required fields before starting.
+            </p>
+
+            <div style="display:flex;justify-content:flex-end;margin-top:16px;">
+              <button id="startBtn" class="btn-primary">Begin Survey</button>
+            </div>
+          </div>
+
+          <div id="questionArea" style="display:none;"></div>
+          <div class="controls">
+            <button id="prevBtn" class="btn-outline" style="display:none;">Previous</button>
+            <div>
+              <button id="nextBtn" class="btn-primary" style="display:none;">Next</button>
+              <button id="submitBtn" class="btn-primary" style="display:none;">Submit</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="meta">
+            <h4 id="metaTitle">Details</h4>
+            <p id="metaSub" class="muted">Please confirm your details before you start.</p>
+          </div>
+          <div class="meta">
+            <h4>Progress</h4>
+            <p id="metaProgress" class="muted">0% complete</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="thankyou" class="thankyou" aria-hidden="true">
+    <div class="ty-card">
+      <div class="ty-check"><svg viewBox="0 0 24 24">
+          <path d="M20 6L9 17l-5-5" stroke="#1f7a3a" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg></div>
+      <div class="ty-title">Thank you!</div>
+      <div class="ty-sub">Your feedback has been recorded successfully.</div>
+    </div>
+  </div>
+
+  <script>
+    const QUESTIONS = [
+      { id: 1, type: 'stars', q: 'Overall, how would you rate your experience working here?' },
+      { id: 2, type: 'stars', q: 'How satisfied were you with your manager?' },
+      { id: 3, type: 'stars', q: 'Rate workplace culture and team collaboration.' },
+      { id: 4, type: 'checkbox', q: 'What motivated you to stay?', options: ['Compensation & benefits', 'Team & colleagues', 'Learning & growth', 'Work-life balance', 'Leadership'] },
+      { id: 5, type: 'checkbox', q: 'What contributed to your decision to leave?', options: ['Better opportunity', 'Compensation', 'Lack of growth', 'Workload/stress', 'Relocation'] },
+      { id: 6, type: 'radio', q: 'Was your workload manageable?', options: ['Yes, comfortable', 'Somewhat heavy', 'Too heavy', 'Varied a lot'] },
+      { id: 7, type: 'radio', q: 'Did you receive adequate feedback?', options: ['Always', 'Often', 'Sometimes', 'Rarely'] },
+      { id: 8, type: 'checkbox', q: 'Which programs helped you most?', options: ['Training', 'Mentorship', 'Tools & software', 'HR programs', 'Peer support'] },
+      { id: 9, type: 'textarea', q: 'What did you like most about working here?' },
+      { id: 10, type: 'textarea', q: 'What could we improve to retain talent?' },
+      { id: 11, type: 'radio', q: 'Would you consider returning someday?', options: ['Yes, definitely', 'Maybe', 'Unlikely', 'No'] },
+      { id: 12, type: 'stars', q: 'How fair was the exit process?' },
+      { id: 13, type: 'checkbox', q: 'Which benefits mattered most?', options: ['Health Insurance', 'Flexible hours', 'Bonuses', 'Paid time off', 'Learning stipend'] },
+      { id: 14, type: 'radio', q: 'Were company values reflected in actions?', options: ['Yes', 'Somewhat', 'Not really', 'No'] },
+      { id: 15, type: 'textarea', q: 'Any final suggestions?' }
+    ];
+    let current = -1, total = QUESTIONS.length, responses = {};
+    const d = document;
+    const detailsEl = d.getElementById('details'), questionArea = d.getElementById('questionArea'),
+      progressBar = d.getElementById('progressBar'), progressText = d.getElementById('progressText'),
+      metaTitle = d.getElementById('metaTitle'), metaSub = d.getElementById('metaSub'), metaProgress = d.getElementById('metaProgress'),
+      startBtn = d.getElementById('startBtn'), prevBtn = d.getElementById('prevBtn'), nextBtn = d.getElementById('nextBtn'), submitBtn = d.getElementById('submitBtn'), thankyou = d.getElementById('thankyou');
+
+    function pctComplete() { return Math.round((Object.keys(responses).length / total) * 100) }
+    function updateMetaUI() {
+      if (current === -1) { progressText.textContent = 'Details'; metaTitle.textContent = 'Details'; metaSub.textContent = 'Confirm details'; progressBar.style.width = '0%'; }
+      else { progressText.textContent = `Question ${current + 1} of ${total}`; metaTitle.textContent = `Q${current + 1}`; metaSub.textContent = QUESTIONS[current].q; progressBar.style.width = `${Math.round(((current + 1) / total) * 100)}%`; }
+      metaProgress.textContent = `${pctComplete()}% complete`;
+    }
+    function renderQuestion(i) {
+      current = i; detailsEl.style.display = 'none'; questionArea.style.display = 'block'; questionArea.innerHTML = '';
+      const q = QUESTIONS[i];
+      const card = d.createElement('div'); card.className = 'question-card anim-enter';
+      const title = d.createElement('div'); title.className = 'q-title'; title.textContent = q.q; card.appendChild(title);
+      if (q.type === 'stars') { const row = d.createElement('div'); row.className = 'stars'; for (let s = 1; s <= 5; s++) { const star = d.createElement('div'); star.className = 'star'; star.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 17.3l6.18 3.64-1.64-7.03L21 8.63l-7.19-.61L12 2 10.19 8.02 3 8.63l4.46 5.28L5.82 21z"/></svg>'; if (responses[q.id] >= s) star.classList.add('active'); star.onclick = () => { responses[q.id] = s; renderQuestion(i) }; row.appendChild(star); } card.appendChild(row); }
+      else if (q.type === 'radio') { q.options.forEach(o => { const div = d.createElement('div'); div.className = 'option'; const lbl = d.createElement('label'); const inp = d.createElement('input'); inp.type = 'radio'; inp.name = 'q' + q.id; inp.value = o; if (responses[q.id] === o) inp.checked = true; inp.onchange = () => responses[q.id] = o; lbl.appendChild(inp); lbl.append(o); div.appendChild(lbl); card.appendChild(div); }); }
+      else if (q.type === 'checkbox') { const grid = d.createElement('div'); grid.className = 'checkbox-grid'; const arr = responses[q.id] || []; q.options.forEach(o => { const lbl = d.createElement('label'); lbl.className = 'option'; const inp = d.createElement('input'); inp.type = 'checkbox'; inp.value = o; if (arr.includes(o)) inp.checked = true; inp.onchange = () => { if (inp.checked) arr.push(o); else arr.splice(arr.indexOf(o), 1); responses[q.id] = arr; }; lbl.appendChild(inp); lbl.append(o); grid.appendChild(lbl); }); card.appendChild(grid); }
+      else if (q.type === 'textarea') { const ta = d.createElement('textarea'); ta.value = responses[q.id] || ''; ta.oninput = () => responses[q.id] = ta.value; card.appendChild(ta); }
+      questionArea.appendChild(card);
+      prevBtn.style.display = i > 0 ? 'inline-block' : 'none';
+      nextBtn.style.display = i < total - 1 ? 'inline-block' : 'none';
+      submitBtn.style.display = i === total - 1 ? 'inline-block' : 'none';
+      updateMetaUI();
+    }
+    startBtn.onclick = () => {
+      const id = document.getElementById('emp_id').value.trim();
+      const dept = document.getElementById('emp_dept').value.trim();
+      const name = document.getElementById('emp_name').value.trim();
+      const error = document.getElementById('detailError');
+
+      if (!id || !dept || !name) {
+        error.style.display = 'block';
+        // Subtle red border highlight
+        ['emp_id', 'emp_dept', 'emp_name'].forEach(fid => {
+          const input = document.getElementById(fid);
+          if (!input.value.trim()) {
+            input.style.borderColor = '#ff6b6b';
+            input.style.boxShadow = '0 0 10px rgba(255,107,107,0.3)';
+          } else {
+            input.style.borderColor = 'rgba(255,255,255,0.15)';
+            input.style.boxShadow = 'none';
+          }
+        });
+        return;
+      }
+
+      // Hide error and reset styles
+      error.style.display = 'none';
+      ['emp_id', 'emp_dept', 'emp_name'].forEach(fid => {
+        const input = document.getElementById(fid);
+        input.style.borderColor = 'rgba(255,255,255,0.15)';
+        input.style.boxShadow = 'none';
+      });
+
+      renderQuestion(0);
+    };
+
+    nextBtn.onclick = () => { if (current < total - 1) renderQuestion(current + 1); }
+    prevBtn.onclick = () => { if (current > 0) renderQuestion(current - 1); }
+    submitBtn.onclick = () => { thankyou.classList.add('show'); }
+    updateMetaUI();
+  </script>
+</body>
+
+</html>
