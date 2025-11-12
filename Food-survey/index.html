@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Company Canteen — Food Survey</title>
+
+  <!-- Fonts & libs -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+  <style>
+    :root {
+      --bg-top: #ffffff;
+      --bg-bottom: #f3eefc;
+      --card-bg: rgba(255, 255, 255, 0.82);
+      --glass: rgba(255, 255, 255, 0.66);
+      --muted: #6b7280;
+      --text: #0b1220;
+      --violet-1: #7b4dff;
+      --blue-1: #4fb1ff;
+      --accent-grad: linear-gradient(90deg, var(--violet-1), var(--blue-1));
+      --soft-shadow: 0 10px 30px rgba(11, 18, 35, 0.08);
+      --glass-border: rgba(124, 77, 255, 0.12);
+    }
+
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: var(--text);
+      background: linear-gradient(160deg, #f5f3ff 0%, #ece8ff 40%, #e2ddff 100%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+
+
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      /* increased from 1000px */
+      padding: 0 40px;
+      /* increased internal spacing */
+      position: relative;
+      z-index: 2;
+      box-sizing: border-box;
+    }
+
+    /* main panel - darker glass, larger padding */
+    .panel {
+      width: 100%;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.88);
+      /* slightly darker glass */
+      border: 1px solid rgba(123, 77, 255, 0.08);
+      padding: 60px;
+      /* increased padding */
+      box-shadow: 0 12px 40px rgba(11, 18, 35, 0.08);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(14px) saturate(130%);
+      box-sizing: border-box;
+    }
+
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 26px;
+      background: linear-gradient(90deg, rgba(123, 77, 255, 0.08), rgba(79, 177, 255, 0.08));
+      filter: blur(18px);
+      z-index: -1;
+      opacity: 0.9;
+    }
+
+    /* Grid */
+    .grid {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 420px;
+    }
+
+    .right {
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+
+
+    @media (max-width: 1024px) {
+      .grid {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .right {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+    }
+
+    .header {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      background: var(--accent-grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-family: Poppins;
+      box-shadow: 0 8px 30px rgba(123, 77, 255, 0.08);
+      font-size: 20px;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .grid {
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 420px;
+    }
+
+    .right {
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .meta {
+      border-radius: 10px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.76));
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(11, 18, 35, 0.04);
+    }
+
+    .meta h4 {
+      margin: 0;
+      color: var(--violet-1);
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .meta p {
+      margin: 8px 0 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* inputs */
+    label {
+      color: var(--muted);
+      font-size: 13px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: var(--text);
+      border: 1px solid rgba(11, 18, 35, 0.06);
+      background: rgba(255, 255, 255, 0.98);
+      outline: none;
+      transition: box-shadow .14s, transform .12s;
+      font-size: 14px;
+    }
+
+    .input:focus {
+      box-shadow: 0 10px 26px rgba(123, 77, 255, 0.06);
+      transform: translateY(-1px);
+      border-color: rgba(123, 77, 255, 0.14);
+    }
+
+    /* question area */
+    /* question card - slightly deeper glass tone */
+    .qcard {
+      margin-top: 20px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(245, 240, 255, 0.92));
+      border-radius: 14px;
+      padding: 24px;
+      /* more breathing room */
+      border: 1px solid rgba(11, 18, 35, 0.05);
+      box-shadow: 0 8px 28px rgba(11, 18, 35, 0.05);
+    }
+
+    .qtxt {
+      font-size: 17px;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    /* options */
+    .opts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(11, 18, 35, 0.03);
+      cursor: pointer;
+      transition: transform .12s, box-shadow .12s, background .12s;
+      background: white;
+    }
+
+    .opt:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(11, 18, 35, 0.06);
+    }
+
+    .opt input[type="radio"],
+    .opt input[type="checkbox"] {
+      transform: scale(1.08);
+      accent-color: var(--violet-1);
+    }
+
+    .opt .label {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* star rating row */
+    .stars {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .star {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      color: rgba(11, 18, 35, 0.18);
+      transition: transform .12s, box-shadow .12s, background .12s, color .12s;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(250, 246, 255, 0.96));
+      border: 1px solid rgba(11, 18, 35, 0.04);
+    }
+
+    .star:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 8px 28px rgba(123, 77, 255, 0.06);
+    }
+
+    .star.filled {
+      color: white;
+      background: var(--accent-grad);
+      box-shadow: 0 8px 30px rgba(123, 77, 255, 0.08);
+      border: none;
+    }
+
+    /* controls */
+    .controls {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin-top: 16px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, rgba(123, 77, 255, 0.98), rgba(79, 177, 255, 0.96));
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(123, 77, 255, 0.08);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid rgba(11, 18, 35, 0.06);
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .btn-ghost[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* progress ring area */
+    .progress-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .prog-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ring stroke */
+    .ring-bg {
+      stroke: #eef2ff;
+      stroke-width: 8;
+    }
+
+    .ring-fg {
+      stroke-linecap: round;
+      stroke: url(#ringGrad);
+      transition: stroke-dashoffset .45s ease;
+      filter: drop-shadow(0 6px 18px rgba(123, 77, 255, 0.08));
+    }
+
+    /* right column adjustments */
+    .right .meta {
+      text-align: center;
+    }
+
+    /* responsive */
+    @media (max-width:920px) {
+      .grid {
+        flex-direction: column;
+      }
+
+      .right {
+        width: 100%;
+        order: 2;
+      }
+    }
+
+    /* focus */
+    .opt:focus-within {
+      outline: 2px solid rgba(123, 77, 255, 0.06);
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="container">
+    <div class="panel" role="application" aria-label="Canteen Survey">
+      <div class="header">
+        <div class="logo">Food</div>
+        <div>
+          <div class="title">Company Canteen — Food Survey</div>
+          <div class="subtitle">Quick feedback to help us improve meals & service — anonymous</div>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:12px;">
+        <!-- left -->
+        <div class="left">
+          <!-- step 1 -->
+          <section id="step1">
+            <label for="emp_id">Employee ID</label>
+            <input id="emp_id" class="input" placeholder="e.g. EMP-1001" autocomplete="off">
+
+            <div style="height:10px"></div>
+            <label for="emp_name">Full name (optional)</label>
+            <input id="emp_name" class="input" placeholder="Optional — will remain anonymous">
+
+            <div style="height:10px"></div>
+            <label for="emp_dept">Department</label>
+            <input id="emp_dept" class="input" placeholder="e.g. Marketing / Sales / HR">
+
+            <div style="height:18px"></div>
+            <div style="text-align:center;">
+              <button id="btnStart" class="btn-primary" aria-label="Begin Survey">Begin Survey</button>
+            </div>
+          </section>
+
+          <!-- step 2 -->
+          <section id="step2" style="display:none;">
+            <div class="progress-row" style="align-items:center;">
+              <div style="display:flex; gap:10px; align-items:center;">
+                <div class="progress-ring" aria-hidden="true">
+                  <svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#7b4dff"></stop>
+                        <stop offset="100%" stop-color="#4fb1ff"></stop>
+                      </linearGradient>
+                    </defs>
+                    <circle class="ring-bg" cx="48" cy="48" r="36" fill="none"></circle>
+                    <circle class="ring-fg" cx="48" cy="48" r="36" fill="none" stroke-width="8"
+                      stroke-dasharray="226.19" stroke-dashoffset="226.19"></circle>
+                  </svg>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:flex-start;">
+                  <div style="font-weight:700; color:var(--violet-1);" id="progText">1 / 10</div>
+                  <div class="prog-label">Progress</div>
+                </div>
+              </div>
+
+              <div style="margin-left:auto; display:flex; gap:12px; align-items:center;">
+                <div class="meta" style="min-width:120px;">
+                  <div style="font-weight:700; color:var(--blue-1);" id="timerText">10:00</div>
+                  <div style="font-size:12px; color:var(--muted); margin-top:6px;">Time left</div>
+                </div>
+
+                <div style="text-align:right;">
+                  <div style="font-weight:700; color:var(--violet-1);" id="metaQ">Question 1</div>
+                  <div style="font-size:12px; color:var(--muted);" id="metaSub">Please answer honestly</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="qcard" id="qcard">
+              <div class="qtxt" id="qText">Loading...</div>
+              <div class="opts" id="qOpts" role="group" aria-labelledby="qText"></div>
+            </div>
+
+            <div class="controls">
+              <button id="btnPrev" class="btn-ghost" disabled aria-label="Previous question">Previous</button>
+              <div style="flex:1"></div>
+              <button id="btnNext" class="btn-primary" aria-label="Next question">Next</button>
+            </div>
+          </section>
+        </div>
+
+        <!-- right -->
+        <div class="right">
+          <div class="meta">
+            <h4 id="rightProgress">1 / 10</h4>
+            <p id="rightNote">Ready</p>
+          </div>
+
+          <div class="meta">
+            <h4 id="leftTimer">10:00</h4>
+            <p class="subtitle">Time Remaining</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ---------- QUESTIONS (10): mixed types ---------- */
+    const QUESTIONS = [
+      { type: 'rating', q: "Overall, how would you rate today's meal quality?", key: 'meal_quality' },
+      { type: 'rating', q: "How satisfied are you with portion sizes?", key: 'portion_size' },
+      { type: 'radio', q: "How often do you eat at the canteen per week?", options: ["0-1", "2-3", "4-5", "6+"], key: 'frequency' },
+      { type: 'checkbox', q: "Which meal types do you usually try? (choose all that apply)", options: ["Breakfast", "Lunch", "Snacks", "Dinner", "Beverages"], key: 'meal_types' },
+      { type: 'rating', q: "How would you rate food temperature (served hot/cold as expected)?", key: 'temperature' },
+      { type: 'radio', q: "How would you rate canteen cleanliness?", options: ["Excellent", "Good", "Average", "Poor"], key: 'cleanliness' },
+      { type: 'checkbox', q: "What improvements would you like? (choose any)", options: ["More vegetarian options", "Healthier choices", "Faster service", "Longer service hours", "More variety"], key: 'improvements' },
+      { type: 'rating', q: "How would you rate value for money?", key: 'value' },
+      { type: 'radio', q: "How friendly/helpful is the canteen staff?", options: ["Very friendly", "Friendly", "Neutral", "Not friendly"], key: 'staff' },
+      { type: 'checkbox', q: "Which cuisines would you like added? (choose any)", options: ["Local/Regional", "Continental", "Asian", "Mexican", "Desserts & Bakery"], key: 'cuisines' }
+    ];
+
+    /* ---------- STATE ---------- */
+    let current = 0;
+    let answers = QUESTIONS.map(q => q.type === 'checkbox' ? [] : null); // checkbox -> array; others -> single/null
+    let timerSeconds = 10 * 60; // 10 minutes
+    let timerInterval = null;
+
+    /* ---------- Progress ring setup ---------- */
+    const ring = document.querySelector('.ring-fg');
+    const R = ring.r.baseVal.value;
+    const C = 2 * Math.PI * R;
+    ring.style.strokeDasharray = `${C}`;
+    ring.style.strokeDashoffset = `${C}`;
+
+    /* ---------- Helpers ---------- */
+    function setRing(fraction) {
+      const offset = C - fraction * C;
+      ring.style.strokeDashoffset = offset;
+    }
+    function fmtTime(s) { const mm = Math.floor(s / 60), ss = s % 60; return (mm < 10 ? ('0' + mm) : mm) + ':' + (ss < 10 ? ('0' + ss) : ss); }
+    function updateMeta() {
+      $('#progText').text((current + 1) + ' / ' + QUESTIONS.length);
+      $('#rightProgress').text((current + 1) + ' / ' + QUESTIONS.length);
+      $('#metaQ').text('Question ' + (current + 1));
+      $('#qText').text(QUESTIONS[current].q);
+      $('#metaSub').text(QUESTIONS[current].type === 'rating' ? 'Rate 1–5 stars' : (QUESTIONS[current].type === 'radio' ? 'Select one option' : 'Select any that apply'));
+      // show selection in rightNote
+      const a = answers[current];
+      let note = '';
+      if (Array.isArray(a)) note = a.length ? 'Selected: ' + a.join(', ') : 'Please choose';
+      else note = a === null ? '' : 'Selected: ' + a;
+      $('#rightNote').text(note);
+      $('#timerText').text(fmtTime(timerSeconds));
+      $('#leftTimer').text(fmtTime(timerSeconds));
+    }
+
+    /* ---------- Render question ---------- */
+    function renderQuestion(i) {
+      const q = QUESTIONS[i];
+      const $opts = $('#qOpts').empty();
+
+      if (q.type === 'rating') {
+        const $row = $('<div class="stars" role="radiogroup" aria-label="Rating 1 to 5"></div>');
+        for (let s = 1; s <= 5; s++) {
+          const $star = $(`<div class="star" data-val="${s}" tabindex="0" role="radio" aria-checked="false" aria-label="${s} star">★</div>`);
+          $star.on('click keypress', function (e) {
+            if (e.type === 'keypress' && e.key !== 'Enter' && e.key !== ' ') return;
+            const v = parseInt($(this).data('val'));
+            answers[i] = v;
+            refreshStars($row, v);
+            updateMeta();
+          });
+          $row.append($star);
+        }
+        // restore
+        if (answers[i]) setTimeout(() => refreshStars($row, answers[i]), 10);
+        $opts.append($row);
+      }
+
+      else if (q.type === 'radio') {
+        q.options.forEach((opt, idx) => {
+          const id = `r_${i}_${idx}_${Math.random().toString(36).substr(2, 5)}`;
+          const $label = $(`<label class="opt" for="${id}" tabindex="0"></label>`);
+          const $input = $(`<input type="radio" id="${id}" name="q_${i}" value="${opt}" aria-label="${opt}">`);
+          const $txt = $(`<span class="label">${opt}</span>`);
+          if (answers[i] === opt) $input.prop('checked', true);
+          $input.on('change', function () { answers[i] = $(this).val(); updateMeta(); });
+          $label.on('click keypress', function (e) { if (e.type === 'keypress' && e.key !== 'Enter' && e.key !== ' ') return; $input.prop('checked', true).trigger('change'); });
+          $label.append($input).append($txt);
+          $opts.append($label);
+        });
+      }
+
+      else if (q.type === 'checkbox') {
+        q.options.forEach((opt, idx) => {
+          const id = `c_${i}_${idx}_${Math.random().toString(36).substr(2, 5)}`;
+          const $label = $(`<label class="opt" for="${id}" tabindex="0"></label>`);
+          const $input = $(`<input type="checkbox" id="${id}" value="${opt}" aria-label="${opt}">`);
+          const $txt = $(`<span class="label">${opt}</span>`);
+          if (Array.isArray(answers[i]) && answers[i].includes(opt)) $input.prop('checked', true);
+          $input.on('change', function () {
+            if ($(this).is(':checked')) { if (!Array.isArray(answers[i])) answers[i] = []; answers[i].push(opt); }
+            else answers[i] = (answers[i] || []).filter(x => x !== opt);
+            updateMeta();
+          });
+          $label.on('click keypress', function (e) { if (e.type === 'keypress' && e.key !== 'Enter' && e.key !== ' ') return; $input.prop('checked', !$input.prop('checked')).trigger('change'); });
+          $label.append($input).append($txt);
+          $opts.append($label);
+        });
+      }
+
+      updateMeta();
+      setRing((current + 1) / QUESTIONS.length);
+    }
+
+    /* ---------- refresh stars ---------- */
+    function refreshStars($container, val) {
+      $container.find('.star').each(function () {
+        const v = parseInt($(this).data('val'));
+        $(this).attr('aria-checked', v === val ? 'true' : 'false');
+        $(this).toggleClass('filled', v <= val);
+      });
+    }
+
+    /* ---------- Timer ---------- */
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (timerSeconds <= 0) { clearInterval(timerInterval); finalizeSubmit(true); return; }
+        timerSeconds--;
+        updateMeta();
+      }, 1000);
+    }
+
+    /* ---------- Controls ---------- */
+    $('#btnStart').on('click', function (e) {
+      e.preventDefault();
+      const id = $('#emp_id').val().trim(), dept = $('#emp_dept').val().trim();
+      if (!id || !dept) {
+        Swal.fire({ icon: 'warning', title: 'Missing info', text: 'Please provide Employee ID and Department to start.' });
+        return;
+      }
+      Swal.fire({
+        title: 'Survey instructions',
+        html: `<div style="text-align:left"><ul style="padding-left:18px"><li>${QUESTIONS.length} questions</li><li>10 minutes total</li><li>Your responses are anonymous</li></ul></div>`,
+        icon: 'info', confirmButtonText: 'Start'
+      }).then(res => {
+        if (res.isConfirmed) {
+          $('#step1').hide(); $('#step2').show();
+          renderQuestion(current);
+          updateMeta();
+          startTimer();
+        }
+      });
+    });
+
+    function updateControls() {
+      $('#btnPrev').prop('disabled', current === 0);
+      $('#btnNext').text(current === QUESTIONS.length - 1 ? 'Finish' : 'Next');
+      updateMeta();
+      setRing((current + 1) / QUESTIONS.length);
+    }
+
+    $('#btnNext').on('click', function () {
+      // friendly nudge if unanswered
+      if (answers[current] === null || (Array.isArray(answers[current]) && answers[current].length === 0)) {
+        Swal.mixin({ toast: true, position: 'top-end', showConfirmButton: false, timer: 1200 }).fire({ icon: 'info', title: 'Tip: please answer this question' });
+      }
+      if (current < QUESTIONS.length - 1) {
+        current++;
+        renderQuestion(current);
+        updateControls();
+      } else {
+        onSubmit();
+      }
+    });
+
+    $('#btnPrev').on('click', function () { if (current > 0) { current--; renderQuestion(current); updateControls(); } });
+
+    $(document).on('keydown', function (e) {
+      if ($('#step2').is(':visible')) {
+        if (e.key === 'ArrowRight') $('#btnNext').click();
+        if (e.key === 'ArrowLeft') $('#btnPrev').click();
+        if (e.key === 'Enter' && $('input:focus').length === 0) $('#btnNext').click();
+      }
+    });
+
+    /* ---------- Submit flow ---------- */
+    function onSubmit() {
+      const missing = [];
+      QUESTIONS.forEach((q, i) => {
+        const a = answers[i];
+        if (q.type === 'checkbox') {
+          if (!Array.isArray(a) || a.length === 0) missing.push(i + 1);
+        } else {
+          if (a === null) missing.push(i + 1);
+        }
+      });
+
+      if (missing.length) {
+        Swal.fire({
+          title: 'Incomplete',
+          html: `Questions unanswered: ${missing.join(', ')}. Submit anyway?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Submit',
+          cancelButtonText: 'Go back'
+        }).then(res => { if (res.isConfirmed) finalizeSubmit(false); });
+      } else finalizeSubmit(false);
+    }
+
+    function finalizeSubmit(auto = false) {
+      clearInterval(timerInterval);
+      // build summary (for preview only)
+      const summary = QUESTIONS.map((q, i) => {
+        const a = answers[i];
+        if (Array.isArray(a)) return `${i + 1}. ${q.q} → ${a.length ? a.join(', ') : 'No selection'}`;
+        return `${i + 1}. ${q.q} → ${a === null ? 'No selection' : a}`;
+      }).join('<br>');
+
+      Swal.fire({
+        title: auto ? 'Time expired — submitted' : 'Thank you!',
+        html: `<div style="text-align:left"><p style="margin:0 0 10px 0">${auto ? 'Your responses were auto-submitted.' : 'Your responses have been recorded.'}</p><div style="max-height:260px; overflow:auto; background:rgba(246,242,255,0.7); padding:10px; border-radius:8px; font-size:13px; text-align:left;">${summary}</div></div>`,
+        icon: 'success',
+        confirmButtonText: 'Close'
+      }).then(() => { location.reload(); });
+    }
+
+    /* ---------- Initialize ---------- */
+    setRing(0);
+    renderQuestion(0);
+    updateControls();
+    updateMeta();
+
+    /* small helper to set ring (exposed) */
+    function setRing(frac) {
+      // wrapper to avoid conflict with earlier setRing
+      const f = Math.max(0, Math.min(1, frac || 0));
+      const offset = C - f * C;
+      ring.style.strokeDashoffset = offset;
+    }
+  </script>
+</body>
+
+</html>

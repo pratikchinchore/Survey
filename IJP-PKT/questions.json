@@ -1,0 +1,137 @@
+[
+    {
+        "q": "",
+        "options": [
+           
+        ]
+    },
+    {
+        "q": "Q1. What is the main focus of Email Marketing?",
+        "options": [
+            { "opt": "Managing day-to-day operations", "val": "Managing day-to-day operations" },
+            { "opt": "Increasing website traffic", "val": "Increasing website traffic" },
+            { "opt": "Engaging with customers through email communication", "val": "Engaging with customers through email communication" },
+            { "opt": "Analysing financial data", "val": "Analysing financial data" }
+        ]
+    },
+    {
+        "q": "Q2. Which of the following is NOT a common goal of an Email Marketing campaign?",
+        "options": [
+            { "opt": "Driving sales and conversions", "val": "Driving sales and conversions" },
+            { "opt": "Increasing social media followers", "val": "Increasing social media followers" },
+            { "opt": "Building brand awareness", "val": "Building brand awareness" },
+            { "opt": "Enhancing customer loyalty", "val": "Enhancing customer loyalty" }
+        ]
+    },
+    {
+        "q": "Q3. True or False: Email Marketing is primarily about sending as many emails as possible to reach a wide audience. ",
+        "options": [
+            { "opt": "True", "val": "True" },
+            { "opt": "False", "val": "False" }  
+        ]
+    },
+    {
+        "q": "Q4. Which of the following is an essential aspect of a successful email campaign?",
+        "options": [
+            { "opt": "Including as much information as possible in one email", "val": "Including as much information as possible in one email" },
+            { "opt": "Using flashy and colorful designs to grab attention", "val": "Increasing social media followers" },
+            { "opt": "Personalizing the content based on the recipient's interests", "val": "Personalizing the content based on the recipient's interests" },
+            { "opt": "Sending emails at random times throughout the day", "val": "Sending emails at random times throughout the day" }
+        ]
+    },
+    {
+        "q": "Q5. What is an 'open rate' in Email Marketing?",
+        "options": [
+            { "opt": "The percentage of emails that bounce back", "val": "Driving sales and conversions" },
+            { "opt": "The percentage of emails that are marked as spam", "val": "The percentage of emails that are marked as spam" },
+            { "opt": "The percentage of emails that are successfully delivered to the recipient's inbox", "val": "The percentage of emails that are successfully delivered to the recipient's inbox" },
+            { "opt": "The percentage of recipients who open and view the email", "val": "The percentage of recipients who open and view the email" }
+        ]
+    },
+    {
+        "q": "Q6. True or False: It's essential to get explicit permission from recipients before adding them to an email list.",
+        "options": [
+            { "opt": "True", "val": "True" },
+            { "opt": "False", "val": "False" }
+        ]
+    },
+    {
+        "q": "Q7. What is an email 'call-to-action' (CTA)?",
+        "options": [
+            { "opt": "A legal disclaimer at the end of the email", "val": "A legal disclaimer at the end of the email" },
+            { "opt": "A request for the recipient to take a specific action, such as clicking a link or making a purchase", "val": "A request for the recipient to take a specific action, such as clicking a link or making a purchase" },
+            { "opt": "A way to unsubscribe from the email list", "val": "A way to unsubscribe from the email list" },
+            { "opt": "A link to the company's social media profiles", "val": "A link to the company's social media profiles" }
+        ]
+    },
+    {
+        "q": "Q8. True or False: A/B testing in Email Marketing involves sending two versions of the same email to different recipients.",
+        "options": [
+            { "opt": "True", "val": "True" },
+            { "opt": "False", "val": "False" }
+        ]
+    },
+    {
+        "q": "Q9. Which of the following can negatively impact email deliverability?",
+        "options": [
+            { "opt": "Regularly cleaning and updating the email list", "val": "Regularly cleaning and updating the email list" },
+            { "opt": "Providing an unsubscribe option in the email", "val": "Providing an unsubscribe option in the email" },
+            { "opt": "Using misleading subject lines", "val": "Using misleading subject lines" },
+            { "opt": "Sending emails with valuable content", "val": "Sending emails with valuable content" }
+        ]
+    },
+    {
+        "q": "Q10. How can you measure the success of an Email Marketing campaign?",
+        "options": [
+            { "opt": "By the number of emails sent", "val": "By the number of emails sent" },
+            { "opt": "By the number of clicks on any link in the email", "val": "By the number of clicks on any link in the email" },
+            { "opt": "By the percentage of emails opened and the click-through rate", "val": "By the percentage of emails opened and the click-through rate" },
+            { "opt": "By the size of the email list", "val": "By the size of the email list" }
+        ]
+    },
+    {
+        "q": "Q11. True or False: Email Marketing is only effective for B2C (business-to-consumer) companies.",
+        "options": [
+            { "opt": "True", "val": "True" },
+            { "opt": "False", "val": "False" }
+        ]
+    },
+    {
+        "q": "Q12. What is the purpose of the formula '=VLOOKUP (A2, B1:C10, 2, FALSE)' in Excel?",
+        "options": [
+            { "opt": "It searches for the value in cell A2 in the range B1 to C10 and returns the corresponding value from the second column (B) if found.", "val": "It searches for the value in cell A2 in the range B1 to C10 and returns the corresponding value from the second column (B) if found." },
+            { "opt": "It looks up the value in cell A2 in the range B1 to C10 and returns the value from the third column (C) if found.", "val": "It looks up the value in cell A2 in the range B1 to C10 and returns the value from the third column (C) if found." },
+            { "opt": "It finds the maximum value in the range B1 to C10.", "val": "It finds the maximum value in the range B1 to C10." },
+            { "opt": "It counts the occurrences of the value in cell A2 in the range B1 to C10.", "val": "It counts the occurrences of the value in cell A2 in the range B1 to C10." }
+        ]
+    },
+    {
+        "q": "Q13. What does SMTP stand for?",
+        "options": [
+            { "opt": "Simple Marketing Transfer Protocol", "val": "Simple Marketing Transfer Protocol" },
+            { "opt": "Standard Mail Transfer Protocol", "val": "Standard Mail Transfer Protocol" },
+            { "opt": "Simple Mail Transfer Protocol", "val": "Simple Mail Transfer Protocol" },
+            { "opt": "Secure Mail Transmission Protocol", "val": "Secure Mail Transmission Protocol" }
+        ]
+    }
+    ,
+    {
+        "q": "Q14. Which of the following is the primary function of SMTP in e-blasts?",
+        "options": [
+            { "opt": "Managing subscriber lists", "val": "Managing subscriber lists" },
+            { "opt": "Sending and relaying outgoing emails", "val": "Sending and relaying outgoing emails" },
+            { "opt": "Collecting email campaign analytics", "val": "Collecting email campaign analytics" },
+            { "opt": "Designing email templates", "val": "Designing email templates" }
+        ]
+    },
+    {
+        "q": "Q15. Which email header is used to indicate the recipient of the email in SMTP?",
+        "options": [
+            { "opt": "Subject", "val": "Subject" },
+            { "opt": "From", "val": "From" },
+            { "opt": "To", "val": "To" },
+            { "opt": "CC (Carbon Copy)", "val": "CC (Carbon Copy)" }
+        ]
+    }
+   
+]

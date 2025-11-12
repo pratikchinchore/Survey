@@ -1,0 +1,197 @@
+/* ========== Base Reset ========== */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #f8f9fb);
+  color: #2d2d2d;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ========== Wrapper & Card ========== */
+.survey-wrapper {
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.survey-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-top: 6px solid #4f46e5;
+}
+
+.survey-card:hover {
+  transform: translateY(-3px);
+}
+
+/* ========== Header ========== */
+.banner-img {
+  width: 100%;
+  max-height: 160px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.surveyTitle {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.surveySub {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+/* ========== Inputs ========== */
+.modern-input {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 12px 14px;
+  transition: all 0.25s ease;
+  background-color: #fafafa;
+}
+
+.modern-input:focus {
+  border-color: #4f46e5;
+  background-color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(79, 70, 229, 0.25);
+}
+
+/* ========== Buttons ========== */
+.btn-gradient {
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #4338ca, #2563eb);
+  transform: scale(1.03);
+}
+
+.btn-outline-secondary {
+  border-radius: 10px;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+.btn-outline-secondary:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+/* ========== Progress ========== */
+.progress {
+  height: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #e5e7eb;
+}
+
+.bg-accent {
+  background: linear-gradient(90deg, #6366f1, #3b82f6);
+  transition: width 0.4s ease-in-out;
+}
+
+.progress-container {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 12px 15px;
+  border: 1px solid #e2e8f0;
+}
+
+/* ========== Question Area ========== */
+.question-area {
+  position: relative;
+  min-height: 200px;
+}
+
+.queDivOuter {
+  display: none;
+  background: #f9fafb;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  padding: 25px;
+  animation: fadeIn 0.4s ease;
+  transition: all 0.3s ease;
+}
+
+.queDivOuter.active {
+  display: block;
+}
+
+.queDivOuter h6 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+/* ========== Options ========== */
+.option {
+  margin-bottom: 12px;
+  padding-left: 10px;
+}
+
+.option label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: background 0.25s ease;
+}
+
+.option:hover {
+  background: #eef2ff;
+}
+
+.option input {
+  accent-color: #4f46e5;
+  transform: scale(1.2);
+}
+
+/* ========== Timer ========== */
+.timerDiv {
+  color: #dc2626;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ========== Animations ========== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .survey-card {
+    padding: 25px;
+  }
+
+  .surveyTitle {
+    font-size: 1.5rem;
+  }
+}

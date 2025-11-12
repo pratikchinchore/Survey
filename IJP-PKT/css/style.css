@@ -1,0 +1,507 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #f5f3ff 0%, #ece9ff 50%, #e1dcff 100%);
+  color: #222;
+}
+
+/* Main container */
+.contanier {
+  background: #ffffffd9;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  max-width: 1050px;
+  margin: 3em auto;
+  padding-bottom: 2em;
+  transition: all 0.3s ease-in-out;
+}
+
+.contanier:hover {
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+}
+
+.headerImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1% auto 0;
+  position: relative;
+}
+
+.headerImg img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 25px;
+}
+
+.headerImg>h2 {
+  position: absolute;
+  top: 18%;
+  left: 5%;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.3;
+  color: #e9262d;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+.ste1Div {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2.5%;
+  width: 92%;
+  margin: 2em auto;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+.step1Textinput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputClass {
+  width: 100%;
+  padding: 5px 2em;
+}
+
+.btnCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  margin-bottom: 1%;
+}
+
+.countinueBtn {
+  background-color: #e9262d;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 16%;
+  margin-top: 20px;
+}
+
+.ste2Div {
+  width: 100%;
+  margin-top: 2%;
+  display: none;
+
+}
+
+.timerDiv {
+  position: fixed;
+  right: 2%;
+  top: 30%;
+  background: #fff;
+  border: 2px solid #e9262d;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #e9262d;
+  box-shadow: 0 2px 10px rgba(233, 38, 45, 0.1);
+}
+
+.questionContainer {
+  border: 1px solid salmon;
+  background-color: #fff;
+  width: 95%;
+  padding: 2% 0%;
+  margin: 0 auto;
+  border-radius: 10px;
+  display: -webkit-box;
+  overflow: hidden;
+}
+
+.quetionDiv {
+  /* width: 87vw; */
+}
+
+.single_Q_Div {
+  background: #ffffffc7;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 25px auto;
+  width: 92%;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease;
+}
+
+.single_Q_Div:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.single_Q_Div h6 {
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.single_Q_Div>.quetionDiv>p {
+  font-weight: 700;
+  /* width: 70%; */
+}
+
+.opitonDiv {
+  margin-top: 10px;
+}
+
+/* Question indicator */
+.queIndicatorContainer {
+  margin: 20px auto;
+  width: 85%;
+  text-align: center;
+}
+
+.queIndicator {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-weight: 600;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.queIndicatorChecked {
+  background-color: #e9262d !important;
+  color: #fff !important;
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .form-row {
+    width: 90%;
+  }
+
+  .headerImg>h2 {
+    font-size: 28px;
+  }
+
+  .countinueBtn,
+  .submitBtn {
+    width: 60%;
+  }
+}
+
+.submitBtn {
+  background-color: #e9262d;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 15%;
+  margin: auto 20px;
+}
+
+#preBtn {
+  background-color: #7e7e7e;
+}
+
+
+.input-data>input::-webkit-outer-spin-button,
+.input-data>input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.input-data>input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.form-row {
+  display: flex;
+  margin: 37px 0;
+  width: 60%;
+}
+
+.form-row .input-data {
+  width: 100%;
+  height: 30px;
+  margin: 0 20px;
+  position: relative;
+}
+
+.form-row {
+  height: 0px;
+}
+
+.input-data>input:focus {
+  outline: 0px;
+}
+
+.input-data input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 15px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.input-data input:focus~label,
+.input-data input:valid~label {
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #FF4742;
+}
+
+.input-data label {
+  position: absolute;
+  pointer-events: none;
+  bottom: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  color: #424242;
+}
+
+.input-data .underline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+}
+
+.input-data .underline:before {
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background: #adadad;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.input-data input:focus~.underline:before,
+.input-data input:valid~.underline:before {
+  transform: scale(1);
+}
+
+.submit-btn .input-data {
+  overflow: hidden;
+  height: 45px !important;
+  width: 25% !important;
+}
+
+.submit-btn .input-data .inner {
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+  transition: all 0.4s;
+}
+
+.submit-btn .input-data:hover .inner {
+  left: 0;
+}
+
+.submit-btn .input-data input {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+/*Submit Button starts  */
+.button {
+  width: 170px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.button-4 {
+  background-color: transparent;
+  border: 2px solid #ef0000;
+  color: #131313;
+  transition: .3s;
+  font-size: 20px;
+
+}
+
+.button-4:hover {
+  animation: pulse 2s infinite;
+  transition: .3s;
+  background-color: #ef0000;
+  color: #fff;
+  font-size: 20px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  70% {
+    transform: scale(.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/*Submit Button ends  */
+
+/* Radio Button starts */
+
+.radio_label {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+}
+
+.radio_label .radio_type {
+  position: absolute;
+  left: -9999px;
+}
+
+.radio_label .radio_type:checked+.radio_span {
+  background-color: #d6d6e5;
+}
+
+.radio_label .radio_type:checked+.radio_span:before {
+  box-shadow: inset 0 0 0 0.4375em #00005c;
+}
+
+.radio_label .radio_span {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease;
+}
+
+.radio_label .radio_span:hover {
+  background-color: #d6d6e5;
+}
+
+.radio_label .radio_span:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em #00005c;
+}
+
+/* Radio Button ends */
+
+
+/* New Radio Button Starts */
+.btn-radio {
+  cursor: pointer;
+  display: inline-flex;
+  /* float: left; */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.btn-radio:not(:first-child) {
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .btn-radio {
+    display: block;
+    float: none;
+  }
+
+  .btn-radio:not(:first-child) {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+}
+
+.btn-radio svg {
+  fill: none;
+  vertical-align: middle;
+}
+
+.btn-radio svg circle {
+  stroke-width: 2;
+  stroke: #C8CCD4;
+}
+
+.btn-radio svg path {
+  stroke: #008FFF;
+}
+
+.btn-radio svg path.inner {
+  stroke-width: 6;
+  stroke-dasharray: 19;
+  stroke-dashoffset: 19;
+}
+
+.btn-radio svg path.outer {
+  stroke-width: 2;
+  stroke-dasharray: 57;
+  stroke-dashoffset: 57;
+}
+
+.btn-radio input {
+  display: none;
+}
+
+.btn-radio input:checked+svg path {
+  transition: all 0.4s ease;
+}
+
+.btn-radio input:checked+svg path.inner {
+  stroke-dashoffset: 38;
+  transition-delay: 0.3s;
+}
+
+.btn-radio input:checked+svg path.outer {
+  stroke-dashoffset: 0;
+}
+
+.btn-radio span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* New Radio Button Ends */
